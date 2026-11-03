@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Nghiên Cứu Văn Học | Giàn Bầu Trước Ngõ - Nguyễn Ngọc Tư</title>
+  
+  <!-- Google Fonts: Playfair Display for literary elegance & Plus Jakarta Sans for crisp readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      /* Color Palette: Earthy tones blended with sleek modern dark theme */
+      --bg-dark: #070d0a;
+      --bg-surface: #0e1712;
+      --bg-surface-elevated: #15221b;
+      --bg-card: rgba(18, 30, 23, 0.72);
+      --bg-card-hover: rgba(26, 42, 33, 0.88);
+      
+      /* Accents: Gourd green & warm golden blossom amber */
+      --accent-green-light: #88b77b;
+      --accent-green: #4e8a52;
+      --accent-green-dark: #27472b;
+      --accent-gold: #e2af56;
+      --accent-gold-soft: #f7d896;
+      --accent-amber: #c47d33;
+      --accent-terracotta: #8c5836;
+      --urban-cold: #7c98a6;
+      
+      /* Typography Colors */
+      --text-primary: #f5f7f4;
+      --text-secondary: #b1c2b5;
+      --text-muted: #728a77;
+      --text-gold: #f0c674;
+      
+      /* Borders & Glassmorphism */
+      --border-subtle: rgba(136, 183, 123, 0.16);
+      --border-accent: rgba(226, 175, 86, 0.35);
+      --border-glow: rgba(136, 183, 123, 0.4);
+      --glass-blur: blur(16px);
+      --box-shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.65);
+      --box-shadow-glow: 0 0 35px rgba(78, 138, 82, 0.25);
+
+      /* Fonts */
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      
+      /* Smooth transitions */
+      --transition-fast: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow: 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      line-height: 1.75;
+      overflow-x: hidden;
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, #112017 0%, var(--bg-dark) 70%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Selection & Scrollbar */
+    ::selection {
+      background: var(--accent-green);
+      color: #ffffff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-green-dark);
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-green);
+    }
+
+    /* ==========================================================================
+       TOP FIXED PROGRESS BAR & NAVIGATION
+       ========================================================================== */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-gold), var(--accent-green-light));
+      box-shadow: 0 0 12px var(--accent-gold);
+      transition: width 0.1s linear;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      width: 92%;
+      max-width: 1200px;
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 18, 13, 0.78);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      transition: all var(--transition-smooth);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar.scrolled {
+      top: 10px;
+      padding: 10px 24px;
+      background: rgba(7, 13, 10, 0.92);
+      border-color: rgba(136, 183, 123, 0.28);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-gold));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(226, 175, 86, 0.4);
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      background: linear-gradient(120deg, #ffffff, var(--accent-green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 22px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-gold);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Sound ambient toggle button */
+    .sound-btn {
+      background: rgba(30, 48, 38, 0.6);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .sound-btn:hover {
+      background: var(--accent-green-dark);
+      color: var(--text-primary);
+      border-color: var(--accent-green-light);
+    }
+
+    .sound-btn.playing {
+      border-color: var(--accent-gold);
+      color: var(--text-gold);
+      box-shadow: 0 0 12px rgba(226, 175, 86, 0.3);
+    }
+
+    /* Mobile nav toggle */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       HERO SECTION: 3D PARALLAX CONTAINER
+       ========================================================================== */
+    .hero-parallax-container {
+      position: relative;
+      width: 100%;
+      height: 125vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      background: #050907;
+    }
+
+    /* Parallax Layer base styling */
+    .parallax-layer {
+      position: absolute;
+      top: -10%;
+      left: -5%;
+      width: 110%;
+      height: 120%;
+      pointer-events: none;
+      will-change: transform;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: transform 0.05s linear;
+    }
+
+    /* Layer 1: Background modern city skyline (contrast / urban blur) */
+    .layer-skyline {
+      z-index: 1;
+      /* Modern urban city night skyline */
+      background-image: 
+        radial-gradient(circle at 50% 60%, rgba(13, 27, 34, 0.45) 0%, rgba(5, 9, 7, 0.88) 80%),
+        url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2000&q=80');
+      filter: blur(4px) brightness(0.65) saturate(0.85);
+      transform: scale(1.12);
+    }
+
+    /* Urban light grid / subtle atmospheric mist */
+    .layer-atmosphere {
+      z-index: 2;
+      background: radial-gradient(circle at 50% 30%, rgba(78, 138, 82, 0.18) 0%, transparent 60%),
+                  linear-gradient(180deg, rgba(5, 9, 7, 0.2) 0%, rgba(7, 13, 10, 0.95) 98%);
+    }
+
+    /* Layer 2: Middle Layer - Rural Gourd Trellis ("Giàn Bầu") */
+    .layer-trellis {
+      z-index: 3;
+      /* Lush natural pergola with creeping green vines */
+      background-image: 
+        linear-gradient(to bottom, rgba(5, 9, 7, 0.3) 0%, rgba(7, 13, 10, 0.1) 50%, rgba(5, 9, 7, 0.85) 100%),
+        url('https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=2000&q=80');
+      filter: contrast(1.1) brightness(0.85);
+      opacity: 0.88;
+      mix-blend-mode: screen;
+    }
+
+    /* Trellis Vector Artwork & Gourds ("Trái Bầu") hanging down */
+    .layer-gourds-svg {
+      z-index: 4;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      opacity: 0.92;
+    }
+
+    /* Layer 3: Silhouette of Grandmother & rustic veranda */
+    .layer-grandmother {
+      z-index: 5;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-right: 10%;
+      padding-bottom: 12%;
+    }
+
+    .grandmother-silhouette-wrapper {
+      position: relative;
+      width: 320px;
+      height: 380px;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
+      opacity: 0.88;
+    }
+
+    /* Layer 4: Foreground Leaves & organic framing */
+    .layer-foreground-leaves {
+      z-index: 6;
+      background-image: 
+        radial-gradient(ellipse at top left, rgba(78, 138, 82, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(46, 92, 53, 0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Hero Text & Central Identity */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 960px;
+      text-align: center;
+      padding: 0 24px;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      margin-top: -60px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 22px;
+      background: rgba(226, 175, 86, 0.12);
+      border: 1px solid var(--border-accent);
+      border-radius: 999px;
+      color: var(--accent-gold-soft);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: var(--glass-blur);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      color: #ffffff;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(78, 138, 82, 0.35);
+    }
+
+    .hero-title .highlight-urban {
+      color: #9cbacf;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-title .highlight-rural {
+      background: linear-gradient(135deg, #a7e099, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 820px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-subtitle em {
+      color: var(--accent-gold);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(14, 23, 18, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      backdrop-filter: var(--glass-blur);
+    }
+
+    .meta-tag strong {
+      color: var(--text-primary);
+    }
+
+    /* Scroll Indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity var(--transition-fast);
+    }
+
+    .scroll-cue:hover {
+      opacity: 1;
+      color: var(--accent-gold);
+    }
+
+    .scroll-cue span {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .mouse-icon {
+      width: 24px;
+      height: 38px;
+      border: 2px solid var(--accent-green-light);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+      box-shadow: 0 0 10px rgba(136, 183, 123, 0.4);
+    }
+
+    .mouse-wheel {
+      width: 4px;
+      height: 8px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+      animation: wheelMove 2s infinite ease-in-out;
+    }
+
+    @keyframes wheelMove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(12px); opacity: 0; }
+    }
+
+    /* ==========================================================================
+       CONTAINER & SECTION COMMON STYLES
+       ========================================================================== */
+    .content-wrapper {
+      position: relative;
+      z-index: 20;
+      background: linear-gradient(180deg, transparent 0%, var(--bg-dark) 4%, var(--bg-dark) 96%, #050806 100%);
+      margin-top: -100px;
+      padding-top: 100px;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 110px 24px;
+      position: relative;
+    }
+
+    /* Section Header component */
+    .section-header {
+      margin-bottom: 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-number {
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(136, 183, 123, 0.08);
+      position: absolute;
+      top: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      user-select: none;
+      z-index: 0;
+      letter-spacing: 4px;
+    }
+
+    .section-tag {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      position: relative;
+      z-index: 1;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Section divider leaf flourish */
+    .flourish-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 20px auto 0;
+      opacity: 0.5;
+    }
+
+    .flourish-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-green-light));
+    }
+
+    .flourish-line.reverse {
+      background: linear-gradient(90deg, var(--accent-green-light), transparent);
+    }
+
+    /* Reveal animations controlled via JS IntersectionObserver */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(45px);
+      transition: opacity var(--transition-slow), transform var(--transition-slow);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-delay-1 { transition-delay: 0.15s; }
+    .stagger-delay-2 { transition-delay: 0.3s; }
+    .stagger-delay-3 { transition-delay: 0.45s; }
+    .stagger-delay-4 { transition-delay: 0.6s; }
+
+    /* ==========================================================================
+       SECTION 1: TÁC GIẢ & TÁC PHẨM (CARD LAYOUT)
+       ========================================================================== */
+    .author-work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 36px;
+      margin-top: 30px;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 42px 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--box-shadow-card);
+      transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-glow);
+      box-shadow: var(--box-shadow-card), var(--box-shadow-glow);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-green), var(--accent-gold), transparent);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-gold);
+      background: rgba(226, 175, 86, 0.1);
+      border: 1px solid rgba(226, 175, 86, 0.25);
+      border-radius: 999px;
+      padding: 4px 14px;
+      margin-bottom: 22px;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .card-subtitle {
+      font-size: 0.95rem;
+      color: var(--accent-green-light);
+      font-weight: 500;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .feature-icon-box {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(78, 138, 82, 0.15);
+      border: 1px solid rgba(136, 183, 123, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-green-light);
+    }
+
+    .feature-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .feature-text p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Spatial Conflict Visualizer */
+    .conflict-box {
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(9, 16, 12, 0.7);
+      border-radius: 14px;
+      border: 1px dashed var(--border-subtle);
+    }
+
+    .conflict-header {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .conflict-vs-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .conflict-side {
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .conflict-side.urban {
+      background: rgba(92, 124, 138, 0.15);
+      border: 1px solid rgba(92, 124, 138, 0.3);
+    }
+
+    .conflict-side.rural {
+      background: rgba(78, 138, 82, 0.15);
+      border: 1px solid rgba(136, 183, 123, 0.3);
+    }
+
+    .conflict-side h5 {
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .conflict-side.urban h5 { color: var(--urban-cold); }
+    .conflict-side.rural h5 { color: var(--accent-green-light); }
+
+    .conflict-side p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .conflict-vs-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: #070d0a;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(226, 175, 86, 0.4);
+    }
+
+    /* ==========================================================================
+       SECTION 2: TÓM TẮT CÂU CHUYỆN (TIMELINE / STEPS LAYOUT)
+       ========================================================================== */
+    .story-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 40px auto 0;
+      padding: 20px 0;
+    }
+
+    /* Central vertical timeline glowing line */
+    .story-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: linear-gradient(180deg, 
+        transparent 0%, 
+        var(--accent-green) 15%, 
+        var(--accent-gold) 50%, 
+        var(--accent-green-light) 85%, 
+        transparent 100%
+      );
+      box-shadow: 0 0 10px rgba(136, 183, 123, 0.3);
+    }
+
+    .timeline-node {
+      position: relative;
+      width: 50%;
+      padding: 24px 40px;
+      box-sizing: border-box;
+    }
+
+    .timeline-node.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-node.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    /* Center marker pip */
+    .timeline-marker {
+      position: absolute;
+      top: 36px;
+      width: 22px;
+      height: 22px;
+      background: var(--bg-surface);
+      border: 3px solid var(--accent-green);
+      border-radius: 50%;
+      z-index: 5;
+      transition: all var(--transition-fast);
+      box-shadow: 0 0 12px rgba(78, 138, 82, 0.6);
+    }
+
+    .timeline-node.left .timeline-marker {
+      right: -11px;
+    }
+
+    .timeline-node.right .timeline-marker {
+      left: -11px;
+    }
+
+    .timeline-node:hover .timeline-marker {
+      background: var(--accent-gold);
+      border-color: #ffffff;
+      transform: scale(1.3);
+      box-shadow: 0 0 20px rgba(226, 175, 86, 0.8);
+    }
+
+    .timeline-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 26px 28px;
+      box-shadow: var(--box-shadow-card);
+      transition: all var(--transition-smooth);
+      position: relative;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-green-light);
+      background: var(--bg-card-hover);
+    }
+
+    .timeline-step-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(226, 175, 86, 0.12);
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .timeline-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .timeline-emotional-tag {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       SECTION 3: LUẬN ĐIỂM 1 - GIÀN BẦU & NỖI NHỚ QUÊ
+       ========================================================================== */
+    .keywords-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .keyword-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: rgba(30, 48, 38, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      color: var(--accent-green-light);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all var(--transition-fast);
+    }
+
+    .keyword-pill:hover {
+      background: rgba(78, 138, 82, 0.35);
+      border-color: var(--accent-gold);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Stylized blockquote cards */
+    .quote-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-bottom: 45px;
+    }
+
+    .literary-quote {
+      position: relative;
+      background: linear-gradient(145deg, rgba(20, 34, 26, 0.75), rgba(11, 20, 15, 0.85));
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 0 16px 16px 0;
+      padding: 32px 30px 28px 36px;
+      box-shadow: var(--box-shadow-card);
+    }
+
+    .quote-glyph {
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba(226, 175, 86, 0.2);
+      user-select: none;
+    }
+
+    .quote-content {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-source {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Analysis 3-pillar grid */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .analysis-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      transition: all var(--transition-smooth);
+    }
+
+    .analysis-card:hover {
+      border-color: var(--accent-green-light);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .analysis-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(226, 175, 86, 0.12);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      margin-bottom: 18px;
+    }
+
+    .analysis-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .analysis-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* Bridge concept visualization */
+    .symbolic-bridge-box {
+      margin-top: 40px;
+      padding: 28px;
+      background: linear-gradient(90deg, rgba(25, 42, 33, 0.8) 0%, rgba(14, 25, 19, 0.9) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bridge-equation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: #ffffff;
+    }
+
+    .bridge-part {
+      padding: 6px 18px;
+      background: rgba(7, 13, 10, 0.6);
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .bridge-part.highlight {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold-soft);
+      box-shadow: 0 0 15px rgba(226, 175, 86, 0.25);
+    }
+
+    /* ==========================================================================
+       SECTION 4: LUẬN ĐIỂM 2 - SỰ CHUYỂN BIẾN CẢM XÚC GIA ĐÌNH (BEFORE/AFTER)
+       ========================================================================== */
+    .character-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .char-tab-btn {
+      padding: 10px 24px;
+      background: rgba(18, 30, 23, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .char-tab-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-green-light);
+    }
+
+    .char-tab-btn.active {
+      background: linear-gradient(135deg, var(--accent-green-dark), var(--accent-green));
+      color: #ffffff;
+      border-color: var(--accent-green-light);
+      box-shadow: 0 4px 18px rgba(78, 138, 82, 0.4);
+    }
+
+    /* Character transformation cards */
+    .character-cards-deck {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .char-comparison-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: var(--box-shadow-card);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      align-items: center;
+      transition: all var(--transition-smooth);
+    }
+
+    .char-comparison-card:hover {
+      border-color: var(--border-glow);
+    }
+
+    .char-identity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-right: 28px;
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .char-avatar-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green-dark), var(--accent-gold));
+      padding: 3px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .char-avatar-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 2rem;
+    }
+
+    .char-name {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .char-role-badge {
+      font-size: 0.78rem;
+      color: var(--accent-green-light);
+      background: rgba(78, 138, 82, 0.15);
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(136, 183, 123, 0.25);
+    }
+
+    /* Before vs After comparison grid */
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .state-panel {
+      padding: 24px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .state-panel.before {
+      background: rgba(26, 20, 20, 0.6);
+      border: 1px solid rgba(200, 100, 100, 0.2);
+    }
+
+    .state-panel.after {
+      background: rgba(20, 36, 26, 0.7);
+      border: 1px solid rgba(136, 183, 123, 0.35);
+      box-shadow: 0 0 20px rgba(78, 138, 82, 0.15);
+    }
+
+    .state-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .state-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .state-panel.before .state-tag {
+      background: rgba(217, 83, 79, 0.2);
+      color: #ff9999;
+    }
+
+    .state-panel.after .state-tag {
+      background: rgba(92, 184, 92, 0.2);
+      color: #99ffaa;
+    }
+
+    .state-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .state-sentiment {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .state-panel.before .state-sentiment {
+      color: #e6a5a5;
+    }
+
+    .state-panel.after .state-sentiment {
+      color: var(--accent-gold-soft);
+    }
+
+    .arrow-shift-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+    }
+
+    .arrow-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(226, 175, 86, 0.15);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(226, 175, 86, 0.3);
+    }
+
+    /* Synthesis of emotion shift */
+    .transformation-summary {
+      margin-top: 36px;
+      background: linear-gradient(135deg, rgba(14, 25, 19, 0.8), rgba(20, 36, 26, 0.85));
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .summary-icon {
+      font-size: 2.2rem;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .summary-text h5 {
+      font-size: 1.1rem;
+      font-family: var(--font-serif);
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .summary-text p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       SECTION 5: LUẬN ĐIỂM 3 & TỔNG HỢP (CORE VALUES & MEMORIAL QUOTE)
+       ========================================================================== */
+    .memorial-quote-card {
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, rgba(35, 60, 45, 0.45) 0%, rgba(10, 18, 14, 0.9) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      padding: 60px 48px;
+      text-align: center;
+      margin-bottom: 60px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(226, 175, 86, 0.15);
+      overflow: hidden;
+    }
+
+    .memorial-quote-card::before {
+      content: '“';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-serif);
+      font-size: 12rem;
+      line-height: 1;
+      color: rgba(226, 175, 86, 0.06);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .memorial-text {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 3.2vw, 2.3rem);
+      font-weight: 700;
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.5;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .memorial-text em {
+      background: linear-gradient(120deg, var(--accent-gold), #ffe8b3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .memorial-author {
+      position: relative;
+      z-index: 1;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold-soft);
+      font-weight: 600;
+    }
+
+    /* Core values dual cards: Content vs Artistic */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 38px 32px;
+      box-shadow: var(--box-shadow-card);
+      position: relative;
+      transition: all var(--transition-smooth);
+    }
+
+    .value-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-glow);
+    }
+
+    .value-card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .value-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(78, 138, 82, 0.25), rgba(226, 175, 86, 0.2));
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+    }
+
+    .value-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .value-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .value-point-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .point-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      margin-top: 8px;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(226, 175, 86, 0.6);
+    }
+
+    /* Overall Research Conclusion Banner */
+    .synthesis-banner {
+      margin-top: 50px;
+      background: linear-gradient(135deg, #101c15, #0a130e);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--box-shadow-card);
+    }
+
+    .synthesis-banner h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .synthesis-banner p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 860px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: #040705;
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 24px 40px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .footer-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .footer-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .back-to-top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: rgba(18, 30, 23, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .back-to-top-btn:hover {
+      background: var(--accent-green-dark);
+      border-color: var(--accent-gold);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .story-timeline::before {
+        left: 28px;
+      }
+      .timeline-node {
+        width: 100%;
+        left: 0 !important;
+        text-align: left !important;
+        padding-left: 64px;
+        padding-right: 16px;
+      }
+      .timeline-node .timeline-marker {
+        left: 17px !important;
+        right: auto !important;
+      }
+      .char-comparison-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .char-identity {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 20px;
+      }
+      .transformation-grid {
+        grid-template-columns: 1fr;
+      }
+      .arrow-shift-divider {
+        transform: rotate(90deg);
+        padding: 10px 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        width: 95%;
+        padding: 10px 18px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-parallax-container {
+        height: 110vh;
+      }
+      .grandmother-silhouette-wrapper {
+        width: 220px;
+        height: 280px;
+        opacity: 0.75;
+      }
+      .section-container {
+        padding: 70px 18px;
+      }
+      .glass-card {
+        padding: 28px 22px;
+      }
+      .memorial-quote-card {
+        padding: 40px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Scroll Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Interactive Floating Header Navigation -->
+  <header class="navbar" id="main-nav">
+    <a href="#hero" class="nav-brand">
+      <div class="brand-icon">
+        <!-- SVG Gourd Leaf Motif -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#070d0a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+      </div>
+      <span class="brand-title">Giàn Bầu Trước Ngõ</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Trang Đầu</a></li>
+        <li><a href="#tac-gia-tac-pham" class="nav-link">Tác Giả & Tác Phẩm</a></li>
+        <li><a href="#tom-tat" class="nav-link">Tóm Tắt</a></li>
+        <li><a href="#luan-diem-1" class="nav-link">Luận Điểm 1</a></li>
+        <li><a href="#luan-diem-2" class="nav-link">Luận Điểm 2</a></li>
+        <li><a href="#luan-diem-3" class="nav-link">Luận Điểm 3 & Tổng Kết</a></li>
+      </ul>
+    </nav>
+
+    <!-- Vanilla Web Audio API Ambient Sound Toggle -->
+    <button class="sound-btn" id="soundToggle" title="Bật/Tắt âm thanh đồng quê êm dịu (Tạo bằng Web Audio API)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+      </svg>
+      <span id="soundText">Âm cảnh</span>
+    </button>
+  </header>
+
+  <!-- ========================================================================
+       1. HERO SECTION: 3D SMOOTH SCROLL PARALLAX AREA
+       ======================================================================== -->
+  <section class="hero-parallax-container" id="hero">
+    
+    <!-- Parallax Layer 1: Blurred Modern City Skyline (Slowest Speed - Deep Background) -->
+    <div class="parallax-layer layer-skyline" data-speed="0.12"></div>
+
+    <!-- Parallax Atmosphere Gradient Layer -->
+    <div class="parallax-layer layer-atmosphere" data-speed="0.22"></div>
+
+    <!-- Parallax Layer 2: Rural Gourd Trellis ("Giàn Bầu") (Medium Speed) -->
+    <div class="parallax-layer layer-trellis" data-speed="0.38"></div>
+
+    <!-- Parallax Layer: Detailed SVG Gourd Vines & Hanging Gourds (Trái Bầu) -->
+    <div class="parallax-layer layer-gourds-svg" data-speed="0.48">
+      <svg width="100%" height="320" viewBox="0 0 1400 320" fill="none" style="overflow: visible;">
+        <!-- Trellis Wooden Beams -->
+        <line x1="0" y1="35" x2="1400" y2="35" stroke="rgba(140, 88, 54, 0.45)" stroke-width="12" />
+        <line x1="120" y1="35" x2="160" y2="180" stroke="rgba(140, 88, 54, 0.35)" stroke-width="6" />
+        <line x1="450" y1="35" x2="480" y2="210" stroke="rgba(140, 88, 54, 0.35)" stroke-width="6" />
+        <line x1="880" y1="35" x2="860" y2="190" stroke="rgba(140, 88, 54, 0.35)" stroke-width="6" />
+        <line x1="1220" y1="35" x2="1240" y2="220" stroke="rgba(140, 88, 54, 0.35)" stroke-width="6" />
+
+        <!-- Gourd 1 (Left) -->
+        <g transform="translate(180, 35)">
+          <path d="M0,0 Q10,40 4,80" stroke="rgba(136, 183, 123, 0.7)" stroke-width="3" fill="none"/>
+          <!-- Gourd Body (Calabash shape: smaller top bulb, larger bottom bulb) -->
+          <path d="M4,80 C-8,95 -12,125 4,145 C-18,175 -16,220 6,245 C28,220 26,175 4,145 C20,125 16,95 4,80 Z" fill="url(#gourdGrad1)" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.6))"/>
+          <!-- Leaves around vine -->
+          <path d="M2,30 Q-30,20 -40,45 Q-20,70 0,40 Z" fill="rgba(78, 138, 82, 0.75)"/>
+          <path d="M4,65 Q35,50 45,75 Q25,95 2,75 Z" fill="rgba(136, 183, 123, 0.7)"/>
+        </g>
+
+        <!-- Gourd 2 (Center Left) -->
+        <g transform="translate(520, 35)">
+          <path d="M0,0 Q-8,50 0,95" stroke="rgba(136, 183, 123, 0.7)" stroke-width="3" fill="none"/>
+          <path d="M0,95 C-12,112 -16,145 0,170 C-24,200 -20,255 4,285 C28,255 32,200 8,170 C24,145 20,112 0,95 Z" fill="url(#gourdGrad2)" filter="drop-shadow(0 12px 18px rgba(0,0,0,0.6))"/>
+          <path d="M0,45 Q-40,30 -50,60 Q-25,85 0,55 Z" fill="rgba(60, 110, 68, 0.8)"/>
+        </g>
+
+        <!-- Gourd 3 (Right) -->
+        <g transform="translate(1050, 35)">
+          <path d="M0,0 Q12,45 2,90" stroke="rgba(136, 183, 123, 0.7)" stroke-width="3" fill="none"/>
+          <path d="M2,90 C-9,106 -12,136 2,158 C-18,188 -14,235 6,260 C26,235 30,188 10,158 C24,136 21,106 2,90 Z" fill="url(#gourdGrad1)" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.6))"/>
+          <path d="M4,55 Q40,40 50,70 Q25,95 2,65 Z" fill="rgba(78, 138, 82, 0.75)"/>
+        </g>
+
+        <!-- Gradients for gourds -->
+        <defs>
+          <linearGradient id="gourdGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#88b77b" />
+            <stop offset="60%" stop-color="#4e8a52" />
+            <stop offset="100%" stop-color="#244528" />
+          </linearGradient>
+          <linearGradient id="gourdGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a4cca0" />
+            <stop offset="70%" stop-color="#55995b" />
+            <stop offset="100%" stop-color="#1e3d22" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Parallax Layer 3: Silhouette of Grandmother Looking Away (Medium-Fast Speed) -->
+    <div class="parallax-layer layer-grandmother" data-speed="0.58">
+      <div class="grandmother-silhouette-wrapper">
+        <!-- Poetic Silhouette of Old Grandmother with traditional hair bun looking at the horizon -->
+        <svg viewBox="0 0 320 380" fill="none" width="100%" height="100%">
+          <!-- Soft glowing halo / lantern glow behind grandmother -->
+          <circle cx="150" cy="180" r="130" fill="url(#haloGrad)" opacity="0.35"/>
+          
+          <!-- Grandmother silhouette: Seated quietly, traditional ao ba ba, hair in bun -->
+          <path d="
+            M 195 90 
+            C 192 78 185 68 172 65 
+            C 160 62 145 66 138 78 
+            C 134 85 135 94 136 102 
+            C 130 103 125 106 122 110 
+            C 118 116 119 124 123 128 
+            C 120 135 120 144 125 150 
+            C 115 158 98 175 92 195 
+            C 85 220 82 255 80 290 
+            C 78 320 75 355 70 380 
+            L 245 380 
+            C 240 345 235 305 230 270 
+            C 225 235 220 200 205 175 
+            C 200 165 195 155 192 145 
+            C 198 140 202 130 200 120 
+            C 204 112 205 100 195 90 Z
+          " fill="#08100b"/>
+          
+          <!-- Traditional Vietnamese hair bun (búi tóc) -->
+          <path d="M 134 82 C 122 80 115 90 120 100 C 125 110 136 108 138 98 Z" fill="#060c09"/>
+
+          <!-- Subtle rim light highlighting the contour of contemplation -->
+          <path d="
+            M 195 90 
+            C 192 78 185 68 172 65 
+            C 160 62 145 66 138 78
+          " stroke="rgba(226, 175, 86, 0.45)" stroke-width="2.5" fill="none"/>
+          <path d="
+            M 205 175 
+            C 200 165 195 155 192 145
+          " stroke="rgba(136, 183, 123, 0.4)" stroke-width="2" fill="none"/>
+
+          <!-- Porch railing / rustic bench wood -->
+          <rect x="40" y="340" width="260" height="14" rx="4" fill="rgba(140, 88, 54, 0.6)"/>
+          <line x1="70" y1="354" x2="70" y2="380" stroke="rgba(140, 88, 54, 0.6)" stroke-width="8"/>
+          <line x1="270" y1="354" x2="270" y2="380" stroke="rgba(140, 88, 54, 0.6)" stroke-width="8"/>
+
+          <defs>
+            <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#e2af56" stop-opacity="0.6"/>
+              <stop offset="60%" stop-color="#4e8a52" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#050907" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Parallax Layer 4: Foreground Framing Leaves (Fastest Speed - In Front) -->
+    <div class="parallax-layer layer-foreground-leaves" data-speed="0.75"></div>
+
+    <!-- Hero Content (Centerpiece with 3D Tilt & Scroll Opacity) -->
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 14 14"></polyline>
+        </svg>
+        Báo Cáo Nghiên Cứu Văn Học Hiện Đại
+      </div>
+
+      <h1 class="hero-title">
+        Tình Yêu Cội Nguồn &<br>
+        <span class="highlight-rural">Sự Chuyển Biến Nhận Thức</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Khảo sát chiều sâu nhân văn qua hình tượng <em>giàn bầu</em> trong truyện ngắn 
+        <strong>"Giàn bầu trước ngõ"</strong> của nhà văn <strong>Nguyễn Ngọc Tư</strong>
+      </p>
+
+      <div class="hero-meta-strip">
+        <div class="meta-tag">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path>
+          </svg>
+          Tác giả: <strong>Nguyễn Ngọc Tư</strong>
+        </div>
+        <div class="meta-tag">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green-light)" stroke-width="2">
+            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+            <path d="M7 7h10v10H7z"></path>
+          </svg>
+          Chủ đề: <strong>Cội Nguồn & Gia Đình</strong>
+        </div>
+        <div class="meta-tag">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--urban-cold)" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Không gian: <strong>Thành Thị vs Nông Thôn</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Smooth Scroll Down Prompt -->
+    <a href="#tac-gia-tac-pham" class="scroll-cue">
+      <span>Khám Phá Báo Cáo</span>
+      <div class="mouse-icon">
+        <div class="mouse-wheel"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ========================================================================
+       CONTENT WRAPPER: SEQUENTIAL CONTENT SECTIONS WITH SCROLL REVEALS
+       ======================================================================== -->
+  <main class="content-wrapper">
+
+    <!-- ======================================================================
+         2. CONTENT SECTION 1: GIỚI THIỆU TÁC GIẢ & TÁC PHẨM
+         ====================================================================== -->
+    <section class="section-container" id="tac-gia-tac-pham">
+      <header class="section-header reveal-on-scroll">
+        <span class="section-number">01</span>
+        <span class="section-tag">Tổng Quan Đối Tượng</span>
+        <h2 class="section-title">Tác Giả & Tác Phẩm</h2>
+        <p class="section-subtitle">
+          Tìm hiểu gương mặt tiêu biểu của văn học Nam Bộ đương đại cùng bối cảnh xung đột không gian trong truyện ngắn
+        </p>
+        <div class="flourish-divider">
+          <div class="flourish-line"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-green-light)">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+          </svg>
+          <div class="flourish-line reverse"></div>
+        </div>
+      </header>
+
+      <div class="author-work-grid">
+        
+        <!-- Card 1: Tác giả Nguyễn Ngọc Tư -->
+        <article class="glass-card reveal-on-scroll stagger-delay-1">
+          <span class="card-badge">Cây Bút Đương Đại</span>
+          <h3 class="card-title">Nguyễn Ngọc Tư</h3>
+          <p class="card-subtitle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+            </svg>
+            Nhà văn của Đất và Người Nam Bộ
+          </p>
+
+          <ul class="card-feature-list">
+            <li class="feature-item">
+              <div class="feature-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <h4>Phong Cách Nghệ Thuật</h4>
+                <p>Cây bút nổi bật hàng đầu văn học đương đại. Lối viết mộc mạc, đậm chất dân dã, vừa sâu lắng, vừa sắc sảo và tinh tế đến từng hơi thở đời thường.</p>
+              </div>
+            </li>
+
+            <li class="feature-item">
+              <div class="feature-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <h4>Sức Mạnh Cảm Xúc</h4>
+                <p>Chạm thẳng vào trái tim mọi độc giả thông qua những chi tiết bình dị, làm sống dậy niềm trắc ẩn, tình làng nghĩa xóm và nỗi khắc khoải phương Nam.</p>
+              </div>
+            </li>
+
+            <li class="feature-item">
+              <div class="feature-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                  <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                  <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <h4>Tâm Thế Sáng Tác</h4>
+                <p>Khắc họa những con người chất phác, những thân phận lênh đênh nhưng chan chứa ân tình, gìn giữ hồn quê giữa những đổi dời thời cuộc.</p>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card 2: Tác phẩm "Giàn bầu trước ngõ" -->
+        <article class="glass-card reveal-on-scroll stagger-delay-2">
+          <span class="card-badge" style="color: var(--accent-green-light); border-color: rgba(136, 183, 123, 0.3);">Tác Phẩm Trọng Tâm</span>
+          <h3 class="card-title">"Giàn Bầu Trước Ngõ"</h3>
+          <p class="card-subtitle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            Biểu Tượng Cội Nguồn Nơi Phố Thị
+          </p>
+
+          <ul class="card-feature-list">
+            <li class="feature-item">
+              <div class="feature-icon-box" style="color: var(--accent-gold); background: rgba(226, 175, 86, 0.15);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <h4>Bài Học Cốt Lõi</h4>
+                <p>Khẳng định sức mạnh của sự thấu hiểu & kết nối gia đình; đánh thức sự trân trọng những giá trị tinh thần giản dị trước khi quá muộn màng.</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Spatial Conflict Visualizer -->
+          <div class="conflict-box">
+            <div class="conflict-header">
+              <span>Xung Đột Không Gian Văn Hóa</span>
+              <span>Đối Trọng</span>
+            </div>
+            
+            <div class="conflict-vs-container">
+              <div class="conflict-side urban">
+                <h5>Thành Thị Hiện Đại</h5>
+                <p>Cuộc sống vội vã, nhà cao tầng sang trọng, bê tông hóa, gấp gáp và xa cách tình cảm.</p>
+              </div>
+
+              <div class="conflict-vs-badge">VS</div>
+
+              <div class="conflict-side rural">
+                <h5>Nông Thôn Dân Dã</h5>
+                <p>Giàn bầu xanh ngát, sự yên bình, mộc mạc, chan chứa tình làng nghĩa xóm & cội rễ.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. CONTENT SECTION 2: TÓM TẮT CÂU CHUYỆN (TIMELINE / STEPS)
+         ====================================================================== -->
+    <section class="section-container" id="tom-tat">
+      <header class="section-header reveal-on-scroll">
+        <span class="section-number">02</span>
+        <span class="section-tag">Diễn Biến Cốt Truyện</span>
+        <h2 class="section-title">Hành Trình Giàn Bầu Nơi Phố Thị</h2>
+        <p class="section-subtitle">
+          Năm chặng biến chuyển từ sự chối từ lạnh nhạt đến hồi chuông thức tỉnh tình thân và cội nguồn
+        </p>
+        <div class="flourish-divider">
+          <div class="flourish-line"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-gold)">
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <div class="flourish-line reverse"></div>
+        </div>
+      </header>
+
+      <div class="story-timeline">
+
+        <!-- Step 1: Bà nội trồng giàn bầu -->
+        <div class="timeline-node left reveal-on-scroll stagger-delay-1">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card">
+            <span class="timeline-step-badge">Giai Đoạn 01</span>
+            <h3 class="timeline-title">Bà nội trồng giàn bầu chốn thị thành</h3>
+            <p class="timeline-desc">
+              Giữa không gian chật hẹp, kín cổng cao tường của ngôi nhà phố, người bà mang theo thói quen lao động lam lũ, lặng lẽ gieo hạt, dựng giàn tre trước ngõ để tìm lại chút hơi thở đất quê.
+            </p>
+            <div class="timeline-emotional-tag">
+              🌱 Nếp sống mộc mạc đối diện không gian xa lạ
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Gia đình chê bai -->
+        <div class="timeline-node right reveal-on-scroll stagger-delay-2">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card">
+            <span class="timeline-step-badge">Giai Đoạn 02</span>
+            <h3 class="timeline-title">Gia đình chê bai, cảm thấy mất vẻ sang trọng</h3>
+            <p class="timeline-desc">
+              Con cháu cảm thấy giàn bầu làm vướng víu lối đi. Cha khó chịu khi phải dắt xe, ngại ngùng với khách sang; cháu đi xe máy phải cúi rạp người; ai nấy đều xem đó là sự quê mùa thừa thãi.
+            </p>
+            <div class="timeline-emotional-tag">
+              ⚡ Khoảng cách thế hệ & định kiến thị dân
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Giàn bầu trở thành ký ức quê hương -->
+        <div class="timeline-node left reveal-on-scroll stagger-delay-3">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card">
+            <span class="timeline-step-badge">Giai Đoạn 03</span>
+            <h3 class="timeline-title">Giàn bầu trở thành ký ức quê hương</h3>
+            <p class="timeline-desc">
+              Mặc cho sự lạnh nhạt của con cháu, giàn bầu vẫn xanh tốt nhờ đôi tay bà. Đó là nơi bà tựa vào để nguôi ngoai nỗi nhớ ruộng đồng, ngồi lặng ngắm hoa bầu nở và chờ mong những thanh âm quen thuộc.
+            </p>
+            <div class="timeline-emotional-tag">
+              🕊️ Điểm tựa tâm hồn & tình yêu quê da diết
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Bà bị tai biến, giàn bầu héo úa -->
+        <div class="timeline-node right reveal-on-scroll stagger-delay-4">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card">
+            <span class="timeline-step-badge" style="color: #ff9999; background: rgba(220, 53, 69, 0.15);">Giai Đoạn 04 (Biến cố)</span>
+            <h3 class="timeline-title">Bà bị tai biến, giàn bầu héo úa</h3>
+            <p class="timeline-desc">
+              Cơn tai biến bất ngờ ập đến khiến bà ngã bệnh nằm một chỗ. Thiếu bàn tay chăm bẵm của bà, giàn bầu trước ngõ bắt đầu úa tàn, lá vàng rụng xác xơ, gợi lên nỗi xót xa tê tái trong lòng ngôi nhà.
+            </p>
+            <div class="timeline-emotional-tag">
+              🍂 Điềm báo phai tàn & khoảng trống vô tận
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Con cháu thấm thía -->
+        <div class="timeline-node left reveal-on-scroll stagger-delay-1">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card" style="border-color: var(--accent-gold); background: rgba(26, 42, 33, 0.9);">
+            <span class="timeline-step-badge" style="color: var(--accent-gold); background: rgba(226, 175, 86, 0.2);">Giai Đoạn 05 (Thức Tỉnh)</span>
+            <h3 class="timeline-title">Con cháu thấm thía tình bà cháu & cội nguồn</h3>
+            <p class="timeline-desc">
+              Chứng kiến giàn bầu héo và người bà yếu ớt, mọi người mới sực tỉnh. Trái bầu bình dị lúc này trở thành bảo vật thiêng liêng, kết nối tình thân và nhắc nhở sâu sắc về nguồn cội mà họ từng lãng quên.
+            </p>
+            <div class="timeline-emotional-tag" style="color: var(--accent-gold-soft);">
+              ✨ Sự hoán cải nhận thức & tình thương sâu thẳm
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. CONTENT SECTION 3: LUẬN ĐIỂM 1 - GIÀN BẦU & NỖI NHỚ QUÊ
+         ====================================================================== -->
+    <section class="section-container" id="luan-diem-1">
+      <header class="section-header reveal-on-scroll">
+        <span class="section-number">03</span>
+        <span class="section-tag">Luận Điểm Trọng Tâm 1</span>
+        <h2 class="section-title">Giàn Bầu & Nỗi Nhớ Quê Của Bà</h2>
+        <p class="section-subtitle">
+          Cây bầu không chỉ là giống cây leo trĩu quả, mà là hiện thân sống động của cội rễ tâm hồn nơi đất khách
+        </p>
+        <div class="flourish-divider">
+          <div class="flourish-line"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-green-light)">
+            <path d="M12 3v18M3 12h18"/>
+          </svg>
+          <div class="flourish-line reverse"></div>
+        </div>
+      </header>
+
+      <!-- Key Concepts / Keywords -->
+      <div class="keywords-row reveal-on-scroll">
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Biểu Tượng Nhớ Quê
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          Nơi Lưu Giữ Ký Ức
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          Điểm Tựa Tâm Hồn Chốn Thành Thị
+        </div>
+      </div>
+
+      <!-- Dẫn chứng văn học đặc sắc -->
+      <div class="quote-showcase">
+        <div class="literary-quote reveal-on-scroll stagger-delay-1">
+          <span class="quote-glyph">“</span>
+          <p class="quote-content">
+            “Nội làm lặt vặt quen rồi. Trồng trọt để đỡ nhớ quê.”
+          </p>
+          <div class="quote-source">— Trích dẫn tác phẩm | Giàn bầu trước ngõ</div>
+        </div>
+
+        <div class="literary-quote reveal-on-scroll stagger-delay-2">
+          <span class="quote-glyph">“</span>
+          <p class="quote-content">
+            “Bà ngồi đấy lặng lẽ, thẫn thờ, như chờ một tiếng vạc sành, một tiếng ếch kêu.”
+          </p>
+          <div class="quote-source">— Chi tiết miêu tả tâm trạng người bà chốn thị thành</div>
+        </div>
+      </div>
+
+      <!-- Phân tích 3 trụ cột -->
+      <div class="analysis-grid">
+        <div class="analysis-card reveal-on-scroll stagger-delay-1">
+          <div class="analysis-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h4>Phân Tích Hành Vi Trồng Bầu</h4>
+          <p>
+            Trồng bầu đối với bà không vì mục đích kinh tế hay giá trị thực phẩm. Đó là hành vi mang tính nghi lễ thiêng liêng: tìm lại nếp sống quen thuộc, tái tạo không gian tinh thần và mang cả mảnh vườn quê hương vào ngôi nhà bê tông lạnh lẽo.
+          </p>
+        </div>
+
+        <div class="analysis-card reveal-on-scroll stagger-delay-2">
+          <div class="analysis-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h4>Hình Tượng Người Bà</h4>
+          <p>
+            Bà đại diện cho thế hệ cội nguồn, biểu tượng của tình yêu quê hương sâu nặng. Dù thân xác ở giữa phố thị tiện nghi hiện đại, tâm hồn bà vẫn luôn hướng về dòng kênh, tiếng ếch kêu, bóng tre và những thanh âm mộc mạc nơi chôn nhau cắt rốn.
+          </p>
+        </div>
+
+        <div class="analysis-card reveal-on-scroll stagger-delay-3">
+          <div class="analysis-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </div>
+          <h4>Ý Nghĩa Chiếc Cầu Nối</h4>
+          <p>
+            Giàn bầu trở thành nơi neo đậu tâm hồn chốn thành thị, một thực thể sống nối liền hai bờ: quá khứ êm đềm với hiện tại vội vã; sự thanh khiết của thiên nhiên với sự xô bồ ngột ngạt của lối sống công nghiệp hóa.
+          </p>
+        </div>
+      </div>
+
+      <!-- Symbolic Bridge Visualization -->
+      <div class="symbolic-bridge-box reveal-on-scroll">
+        <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold);">
+          Phương Trình Biểu Tượng Văn Học
+        </div>
+        <div class="bridge-equation">
+          <span class="bridge-part">Nơi Lưu Giữ Nỗi Nhớ</span>
+          <span style="color: var(--accent-gold);">⟷</span>
+          <span class="bridge-part highlight">Giàn Bầu Trước Ngõ</span>
+          <span style="color: var(--accent-gold);">⟷</span>
+          <span class="bridge-part">Chiếc Cầu Nối Quá Khứ & Hiện Tại</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. CONTENT SECTION 4: LUẬN ĐIỂM 2 - SỰ CHUYỂN BIẾN CẢM XÚC GIA ĐÌNH
+         ====================================================================== -->
+    <section class="section-container" id="luan-diem-2">
+      <header class="section-header reveal-on-scroll">
+        <span class="section-number">04</span>
+        <span class="section-tag">Luận Điểm Trọng Tâm 2</span>
+        <h2 class="section-title">Sự Chuyển Biến Cảm Xúc Gia Đình</h2>
+        <p class="section-subtitle">
+          Sự xóa bỏ khoảng cách thế hệ và quá trình thức tỉnh nhận thức của từng thành viên trong gia đình
+        </p>
+        <div class="flourish-divider">
+          <div class="flourish-line"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-gold)">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <div class="flourish-line reverse"></div>
+        </div>
+      </header>
+
+      <!-- Key Concept Pills -->
+      <div class="keywords-row reveal-on-scroll">
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          Cầu Nối Thế Hệ
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Xóa Bỏ Khoảng Cách
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          Chuyển Biến Nhận Thức
+        </div>
+      </div>
+
+      <!-- Characters Before / After Comparison Deck -->
+      <div class="character-cards-deck">
+
+        <!-- Character 1: Nhân vật "Tôi" -->
+        <div class="char-comparison-card reveal-on-scroll stagger-delay-1">
+          <div class="char-identity">
+            <div class="char-avatar-ring">
+              <div class="char-avatar-inner">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+            </div>
+            <h3 class="char-name">Nhân vật "Tôi"</h3>
+            <span class="char-role-badge">Người kể chuyện • Cháu nội</span>
+          </div>
+
+          <div class="transformation-grid">
+            <!-- Before -->
+            <div class="state-panel before">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Ban Đầu</span>
+                  <span style="font-size: 0.75rem; color: #ff9999;">Bất tiện • Chê bai</span>
+                </div>
+                <p class="state-quote">
+                  “Tôi không thích khi cưỡi xe vào tận thềm nhà lại phải rạp mình dưới giàn bầu ấy.”
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Thái độ thờ ơ, xem giàn bầu là chướng ngại khó chịu cho thói quen đi lại tiện nghi.
+              </div>
+            </div>
+
+            <!-- Transition Arrow -->
+            <div class="arrow-shift-divider">
+              <div class="arrow-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- After -->
+            <div class="state-panel after">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Về Sau</span>
+                  <span style="font-size: 0.75rem; color: #99ffaa;">Thay đổi • Xúc động</span>
+                </div>
+                <p class="state-quote">
+                  “Lần đầu tiên, tôi thấy món quà của nội dễ thương đến thế.”
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Nhận ra tấm lòng yêu thương nâng niu của bà, xúc động nghẹn ngào trước sự vô giá của tình thân.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 2: Chị Lan -->
+        <div class="char-comparison-card reveal-on-scroll stagger-delay-2">
+          <div class="char-identity">
+            <div class="char-avatar-ring">
+              <div class="char-avatar-inner">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"></path>
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="char-name">Chị Lan</h3>
+            <span class="char-role-badge">Người cháu gái</span>
+          </div>
+
+          <div class="transformation-grid">
+            <!-- Before -->
+            <div class="state-panel before">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Ban Đầu</span>
+                  <span style="font-size: 0.75rem; color: #ff9999;">Chán ngán • Thờ ơ</span>
+                </div>
+                <p class="state-quote">
+                  “Nội ơi, trồng chi nhiều vậy?”
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Xem việc làm của bà là việc thừa thãi, phiền phức, không hiểu được nỗi niềm nhớ quê của người già.
+              </div>
+            </div>
+
+            <!-- Transition Arrow -->
+            <div class="arrow-shift-divider">
+              <div class="arrow-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- After -->
+            <div class="state-panel after">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Về Sau</span>
+                  <span style="font-size: 0.75rem; color: #99ffaa;">Thấu hiểu • Trân trọng</span>
+                </div>
+                <p class="state-quote">
+                  Vui vẻ đón nhận món quà của bà, chủ động nài nỉ nhân vật "tôi" hãy nhận lấy quả bầu bà tặng để bà yên lòng.
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Chuyển từ trách cứ sang thấu cảm tâm sự của bà; biết bảo bọc và chia sẻ niềm vui giản dị với nội.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 3: Người cha -->
+        <div class="char-comparison-card reveal-on-scroll stagger-delay-3">
+          <div class="char-identity">
+            <div class="char-avatar-ring">
+              <div class="char-avatar-inner">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 21v-2a4 4 0 0 0-8 0v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+            </div>
+            <h3 class="char-name">Người Cha</h3>
+            <span class="char-role-badge">Trụ cột gia đình</span>
+          </div>
+
+          <div class="transformation-grid">
+            <!-- Before -->
+            <div class="state-panel before">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Ban Đầu</span>
+                  <span style="font-size: 0.75rem; color: #ff9999;">Khó chịu • Tự ái sang trọng</span>
+                </div>
+                <p class="state-quote">
+                  “Cha tôi khó chịu khi phải dắt quan khách len lỏi bên mấy trái bầu để vào căn nhà sang trọng.”
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Áp đặt quy chuẩn thị dân, lo ngại vẻ quê mùa của giàn bầu làm tổn hại đến sự sang trọng và vị thế xã hội.
+              </div>
+            </div>
+
+            <!-- Transition Arrow -->
+            <div class="arrow-shift-divider">
+              <div class="arrow-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- After -->
+            <div class="state-panel after">
+              <div>
+                <div class="state-header">
+                  <span class="state-tag">Về Sau</span>
+                  <span style="font-size: 0.75rem; color: #99ffaa;">Chủ động • Tự hào tình thân</span>
+                </div>
+                <p class="state-quote">
+                  “Để con đi mua tôm.” — Tiếng nói ấm áp chủ động chuẩn bị bữa cơm ấm cúng với quả bầu của mẹ già.
+                </p>
+              </div>
+              <div class="state-sentiment">
+                Bỏ qua vỏ bọc hào nhoáng phố thị, quay về với cương vị người con hiếu thảo, tìm thấy niềm hạnh phúc đơn sơ bên mẹ.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Đúc kết luận điểm 2 -->
+      <div class="transformation-summary reveal-on-scroll">
+        <div class="summary-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <div class="summary-text">
+          <h5>Đúc Kết Chuyển Biến Nhận Thức</h5>
+          <p>
+            Giàn bầu trước ngõ đã trở thành chiếc cầu nối nhiệm màu hàn gắn tình cảm giữa các thế hệ. Từ những khó chịu ban đầu, các thành viên trong gia đình đã thấu suốt giá trị tinh thần thiêng liêng và tình yêu thương vô điều kiện ẩn sâu dưới lớp vỏ mộc mạc, bình dị.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. CONTENT SECTION 5: LUẬN ĐIỂM 3 & TỔNG HỢP GIÁ TRỊ
+         ====================================================================== -->
+    <section class="section-container" id="luan-diem-3">
+      <header class="section-header reveal-on-scroll">
+        <span class="section-number">05</span>
+        <span class="section-tag">Luận Điểm 3 & Tổng Hợp</span>
+        <h2 class="section-title">Bài Học Kết Nối & Giá Trị Cội Nguồn</h2>
+        <p class="section-subtitle">
+          Sức sống vĩnh cửu của nguồn cội và những thông điệp nghệ thuật vô giá gửi gắm đến muôn đời
+        </p>
+        <div class="flourish-divider">
+          <div class="flourish-line"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-gold)">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <div class="flourish-line reverse"></div>
+        </div>
+      </header>
+
+      <!-- Key Concepts -->
+      <div class="keywords-row reveal-on-scroll">
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          Kết Nối Gia Đình
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          Sức Sống Vĩnh Cửu
+        </div>
+        <div class="keyword-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+            <path d="M2 12h20"></path>
+          </svg>
+          Bản Sắc Tâm Hồn
+        </div>
+      </div>
+
+      <!-- Golden Memorial Literary Quote -->
+      <div class="memorial-quote-card reveal-on-scroll">
+        <p class="memorial-text">
+          “Có thể bứt người ta ra khỏi quê hương nhưng không thể <em>tách quê hương ra khỏi trái tim</em> con người.”
+        </p>
+        <span class="memorial-author">— Tư tưởng chủ đạo bất hủ | Truyện ngắn Nguyễn Ngọc Tư</span>
+      </div>
+
+      <!-- Giá trị cốt lõi: Nội dung vs Nghệ thuật -->
+      <div class="values-grid">
+        
+        <!-- Giá trị nội dung -->
+        <div class="value-card reveal-on-scroll stagger-delay-1">
+          <div class="value-card-header">
+            <div class="value-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h3 class="value-title">Giá Trị Nội Dung</h3>
+          </div>
+
+          <ul class="value-points">
+            <li class="value-point-item">
+              <span class="point-dot"></span>
+              <div><strong>Ca ngợi tình cảm gia đình:</strong> Khắc họa sâu sắc tình mẫu tử, tình bà cháu thiêng liêng, là điểm tựa bình yên nhất trong cõi người.</div>
+            </li>
+            <li class="value-point-item">
+              <span class="point-dot"></span>
+              <div><strong>Tôn vinh tình yêu quê hương:</strong> Nhắc nhở thế hệ trẻ về đạo lý cội nguồn; dù phiêu bạt chốn phồn hoa vẫn không quên gốc gác tổ tiên.</div>
+            </li>
+            <li class="value-point-item">
+              <span class="point-dot"></span>
+              <div><strong>Bài học thức tỉnh nhân văn:</strong> Đừng để sự vô tâm của nhịp sống hiện đại cuốn trôi đi những ký ức và những con người quý giá nhất bên cạnh ta.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Giá trị nghệ thuật -->
+        <div class="value-card reveal-on-scroll stagger-delay-2">
+          <div class="value-card-header">
+            <div class="value-icon" style="color: var(--accent-green-light);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="value-title">Giá Trị Nghệ Thuật</h3>
+          </div>
+
+          <ul class="value-points">
+            <li class="value-point-item">
+              <span class="point-dot" style="background: var(--accent-green-light);"></span>
+              <div><strong>Ngôn ngữ mộc mạc Nam Bộ:</strong> Lời văn tự nhiên, đậm đặc phương ngữ sông nước Cà Mau, giàu nhạc điệu và sức gợi cảm xúc khôn nguôi.</div>
+            </li>
+            <li class="value-point-item">
+              <span class="point-dot" style="background: var(--accent-green-light);"></span>
+              <div><strong>Miêu tả tâm lý bậc thầy:</strong> Khắc họa chuyển biến nhận thức nhân vật tinh tế, chân thực, không gượng gạo giáo điều.</div>
+            </li>
+            <li class="value-point-item">
+              <span class="point-dot" style="background: var(--accent-green-light);"></span>
+              <div><strong>Hình tượng nghệ thuật giàu sức biểu trưng:</strong> "Giàn bầu" vượt khỏi phạm vi đời thường trở thành một ẩn dụ triết học sâu xa về văn hóa dân tộc.</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Synthesis Banner -->
+      <div class="synthesis-banner reveal-on-scroll">
+        <h3>Tổng Hợp Kết Quả Nghiên Cứu</h3>
+        <p>
+          Tác phẩm <em>"Giàn bầu trước ngõ"</em> là một khúc ca êm dịu mà day dứt về thân phận con người trong thời kỳ đô thị hóa. Từ hình tượng giàn bầu bình dị, nhà văn Nguyễn Ngọc Tư đã khẳng định một chân lý vĩnh hằng: <strong>Dù đi xa đến đâu, cội nguồn quê hương và tình thương gia đình vẫn luôn là bến đỗ bình yên nâng đỡ tâm hồn con người.</strong>
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-info">
+        <h4>Báo Cáo Nghiên Cứu Văn Học Hiện Đại</h4>
+        <p>Đề tài: Tình yêu cội nguồn và sự chuyển biến nhận thức gia đình qua hình tượng giàn bầu ("Giàn bầu trước ngõ" — Nguyễn Ngọc Tư)</p>
+      </div>
+
+      <a href="#hero" class="back-to-top-btn" id="backToTop">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+        Trở Về Đầu Trang
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      Bản quyền nội dung thuộc nhóm nghiên cứu văn học • Thiết kế tương tác 3D Parallax Storytelling
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       VANILLA JAVASCRIPT: 3D PARALLAX, SCROLL REVEALS & INTERACTION
+       ======================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ------------------------------------------------------------------------
+         1. SCROLL PROGRESS BAR & NAVBAR STATE
+         ------------------------------------------------------------------------ */
+      const progressBar = document.getElementById('progress-bar');
+      const navbar = document.getElementById('main-nav');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id], main');
+
+      function updateScrollMetrics() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        
+        // Update reading progress bar
+        if (progressBar) {
+          progressBar.style.width = scrollPercent + '%';
+        }
+
+        // Navbar blur intensification
+        if (navbar) {
+          if (scrollTop > 80) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }
+
+        // Active link tracking
+        const scrollPosition = scrollTop + 250;
+        document.querySelectorAll('section[id]').forEach(section => {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          const id = section.getAttribute('id');
+          
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateScrollMetrics, { passive: true });
+      updateScrollMetrics();
+
+
+      /* ------------------------------------------------------------------------
+         2. HIGH-PERFORMANCE 3D SMOOTH PARALLAX SCROLL (HERO SECTION)
+         ------------------------------------------------------------------------ */
+      const heroSection = document.getElementById('hero');
+      const parallaxLayers = document.querySelectorAll('.parallax-layer[data-speed]');
+      const heroContent = document.getElementById('heroContent');
+
+      let currentScrollY = 0;
+      let targetScrollY = 0;
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentMouseX = 0;
+      let currentMouseY = 0;
+
+      // Mouse Move 3D Perspective Tilt on Hero
+      if (heroSection) {
+        window.addEventListener('mousemove', (e) => {
+          const { innerWidth, innerHeight } = window;
+          // Calculate normalized mouse coords (-1 to 1)
+          mouseX = (e.clientX / innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / innerHeight - 0.5) * 2;
+        }, { passive: true });
+      }
+
+      function renderParallax() {
+        targetScrollY = window.scrollY || document.documentElement.scrollTop;
+        
+        // Smooth interpolation for mouse tilt
+        currentMouseX += (mouseX - currentMouseX) * 0.08;
+        currentMouseY += (mouseY - currentMouseY) * 0.08;
+
+        const heroHeight = heroSection ? heroSection.offsetHeight : 1000;
+
+        // Only compute parallax if hero is visible within or near viewport
+        if (targetScrollY <= heroHeight + 200) {
+          parallaxLayers.forEach(layer => {
+            const speed = parseFloat(layer.getAttribute('data-speed')) || 0.2;
+            const yOffset = targetScrollY * speed;
+            const xMouseOffset = currentMouseX * (speed * 28);
+            const yMouseOffset = currentMouseY * (speed * 20);
+
+            layer.style.transform = `translate3d(${xMouseOffset.toFixed(2)}px, ${yOffset.toFixed(2)}px, 0)`;
+          });
+
+          // 3D tilt and opacity fade out on Hero typography content
+          if (heroContent) {
+            const contentSpeed = 0.55;
+            const contentY = targetScrollY * contentSpeed;
+            const fadeThreshold = heroHeight * 0.7;
+            const opacity = Math.max(0, 1 - (targetScrollY / fadeThreshold));
+            
+            const rotateX = -currentMouseY * 6;
+            const rotateY = currentMouseX * 8;
+
+            heroContent.style.transform = `translate3d(0, ${contentY.toFixed(2)}px, 0) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+            heroContent.style.opacity = opacity.toFixed(2);
+          }
+        }
+
+        requestAnimationFrame(renderParallax);
+      }
+
+      // Kick off the 60fps RAF loop
+      requestAnimationFrame(renderParallax);
+
+
+      /* ------------------------------------------------------------------------
+         3. INTERSECTION OBSERVER: IN-VIEW SCROLL REVEALS
+         ------------------------------------------------------------------------ */
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              // Keep active once revealed to prevent jarring re-animations
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: null,
+          rootMargin: '0px 0px -80px 0px',
+          threshold: 0.12
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      } else {
+        // Fallback for older browsers
+        revealElements.forEach(el => el.classList.add('in-view'));
+      }
+
+
+      /* ------------------------------------------------------------------------
+         4. VANILLA WEB AUDIO API AMBIENT SOUND GENERATOR (PEACEFUL NIGHT BREEZE)
+         ------------------------------------------------------------------------ */
+      const soundToggleBtn = document.getElementById('soundToggle');
+      const soundText = document.getElementById('soundText');
+      let audioCtx = null;
+      let isPlayingSound = false;
+      let ambientGain = null;
+      let cricketTimer = null;
+
+      function createPeacefulAmbience() {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+
+          // Master volume gain
+          ambientGain = audioCtx.createGain();
+          ambientGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+          ambientGain.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 3);
+          ambientGain.connect(audioCtx.destination);
+
+          // 1. Soft wind breeze noise (Pink/White noise with bandpass sweep)
+          const bufferSize = audioCtx.sampleRate * 2;
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
+
+          const whiteNoise = audioCtx.createBufferSource();
+          whiteNoise.buffer = noiseBuffer;
+          whiteNoise.loop = true;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+
+          whiteNoise.connect(filter);
+          filter.connect(ambientGain);
+          whiteNoise.start();
+
+          // 2. Periodic gentle cricket / nighttime chime sound
+          function playGentleChime() {
+            if (!isPlayingSound || !audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const noteGain = audioCtx.createGain();
+            
+            // Soft pleasant pentatonic bell-like harmonic frequencies (F#, G#, A#, C#, D#)
+            const notes = [587.33, 659.25, 783.99, 880.00, 1046.50];
+            const randomNote = notes[Math.floor(Math.random() * notes.length)];
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(randomNote, audioCtx.currentTime);
+
+            noteGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            noteGain.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.1);
+            noteGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+
+            osc.connect(noteGain);
+            noteGain.connect(ambientGain);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 2.6);
+
+            const nextInterval = 2500 + Math.random() * 4500;
+            cricketTimer = setTimeout(playGentleChime, nextInterval);
+          }
+
+          playGentleChime();
+        } catch (e) {
+          console.warn('Web Audio API not supported or blocked by user gesture:', e);
+        }
+      }
+
+      function stopAmbience() {
+        if (ambientGain && audioCtx) {
+          ambientGain.gain.setValueAtTime(ambientGain.gain.value, audioCtx.currentTime);
+          ambientGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+          setTimeout(() => {
+            if (audioCtx && audioCtx.state !== 'closed') {
+              audioCtx.close();
+            }
+            audioCtx = null;
+          }, 1100);
+        }
+        if (cricketTimer) {
+          clearTimeout(cricketTimer);
+        }
+      }
+
+      if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', () => {
+          if (!isPlayingSound) {
+            isPlayingSound = true;
+            soundToggleBtn.classList.add('playing');
+            soundText.textContent = 'Đang phát';
+            createPeacefulAmbience();
+          } else {
+            isPlayingSound = false;
+            soundToggleBtn.classList.remove('playing');
+            soundText.textContent = 'Âm cảnh';
+            stopAmbience();
+          }
+        });
+      }
+
+
+      /* ------------------------------------------------------------------------
+         5. SMOOTH BACK TO TOP
+         ------------------------------------------------------------------------ */
+      const backToTopBtn = document.getElementById('backToTop');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
